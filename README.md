@@ -90,6 +90,16 @@ command:
   - Titles & Subtitles
   - Custom system messages in `messages.yml`
 
+## 🛠 Building
+
+To build the project yourself using Maven:
+
+```bash
+mvn clean package
+```
+
+The output JAR will be in `target/`.
+
 ---
 
 **Original Project:** [WelcomeMat](https://github.com/coffeeisle/welcome-mat) (This is a simplified "Lite" fork).

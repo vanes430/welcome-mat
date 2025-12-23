@@ -22,12 +22,15 @@
 hs_err_pid*
 replay_pid*
 
-# Gradle
-.gradle/
-build/
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
 
 # IDE specific files
-bin/
 .vscode/
 .idea/
 *.iml
@@ -36,15 +39,11 @@ bin/
 .project
 *.DS_Store
 
-# Documentation & release notes (optional to ignore)
+# Documentation & release notes
 modrinth.md
 INFO.md
 RELEASE_NOTES.md
 docs/
 
-# Github specific (optional, but usually kept if using Actions)
-# .github/
-
-# Jars (but keep wrapper)
+# Jars
 *.jar
-!gradle/wrapper/gradle-wrapper.jar
