@@ -253,4 +253,29 @@ public class SchedulerAdapter {
     private long ensurePositiveTicks(long ticks) {
         return ticks <= 0L ? 1L : ticks;
     }
+
+    public void runEntityLater(Player player, long delayTicks, Runnable runnable) {
+        if (foliaAvailable) {
+            final java.util.concurrent.atomic.AtomicReference<TaskHandle> handleRef = new java.util.concurrent.atomic.AtomicReference<>();
+            Runnable wrapped = () -> {
+                try {
+                    runnable.run();
+                } finally {
+                    TaskHandle h = handleRef.get();
+                    if (h != null) {
+                        h.cancel();
+                    }
+                }
+            };
+            TaskHandle h = runEntityRepeating(player, delayTicks, 50L, wrapped);
+            handleRef.set(h);
+        } else {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    runnable.run();
+                }
+            }.runTaskLater(plugin, delayTicks);
+        }
+    }
 }

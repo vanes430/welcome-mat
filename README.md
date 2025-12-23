@@ -1,133 +1,95 @@
-![WelcomeMat Logo](https://github.com/coffeeisle/welcome-mat/blob/main/assets/gh_header.png)
+# WelcomeMat Lite
 
-<div align="center">
-  <h1>WelcomeMat</h1>
-  <p>A friendly way to roll out the welcome mat for your players!</p>
-  
-  <p>
-    <a href="https://modrinth.com/plugin/welcome-mat">
-      <img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/welcome-mat?logo=modrinth&labelColor=34343c&color=00AF5C">
-    </a>
-    <a href="https://discord.gg/cJ4uP2xF7h">
-      <img alt="Discord" src="https://img.shields.io/discord/813255312449601597?logo=discord&labelColor=34343c&color=5865F2">
-    </a>
-    <a href="https://github.com/coffeeisle/welcome-mat">
-      <img alt="Modrinth Game Versions" src="https://img.shields.io/modrinth/game-versions/welcome-mat?color=00AF5C&label=Minecraft&logo=modrinth">
-    </a>
-    <a href="https://modrinth.com/plugin/welcome-mat">
-      <img alt="Modrinth Version" src="https://img.shields.io/modrinth/v/welcome-mat?&color=blue&label=Version">
-    </a>
-  </p>
-</div>
-
-## 📥 Download
-
-WelcomeMat is available on Modrinth! Click the button below to download:
-
-<a href="https://modrinth.com/plugin/welcome-mat">
-  <img alt="Download on Modrinth" src="https://avatars.githubusercontent.com/u/67560307" width="60">
-</a>
-
-## 🔄 Compatibility
-
-WelcomeMat is compatible with Minecraft versions 1.13 through 1.21.10 and is fully tested on Bukkit/Spigot, Paper, Purpur, and Folia (regionized multithreading). The Folia build uses region-aware schedulers so the same jar runs safely on both single-threaded and regionized servers.
-
-### 🚀 What's New in v1.3.3
-- **Animation test polish:** `/wm animation test <name|random>` now cycles through every registered animation, making it easier to preview the expanded effect roster on live servers.
-- **Confetti Burst fix:** Folia servers no longer spam `missing required data class org.bukkit.Color`—the Confetti Burst animation now supplies proper dust color transitions and sparkles.
-- **Safe config migrations:** `config.yml` and `messages.yml` automatically back up and merge new defaults, so upgrading from older releases preserves customizations without YAML errors.
+A lightweight, bloat-free welcome plugin for your Minecraft server. 
+Designed for modern server environments (Folia/Paper/Spigot 1.21+), focusing purely on the essentials: Join/Leave Messages, Titles, Sounds, and customization.
 
 ## ✨ Features
 
-### Core Features
-| Feature | Description | Status |
-|---------|-------------|--------|
-| Message Packs | Multiple themed welcome messages | ✅ Implemented |
-| Welcome Titles | Customizable titles and subtitles | ✅ Implemented |
-| Interactive Sounds | Configurable join/leave sounds | ✅ Implemented |
-| Join Effects | Beautiful particle effects | ✅ Implemented |
-| Language Support | Multiple language options | ✅ Implemented |
-| User-Friendly GUI | Easy settings management | ✅ Implemented |
+- **Lightweight & Fast:** No database, no complex GUIs, no heavy particle engines. Just the essentials.
+- **Folia Supported:** Fully compatible with Folia's regionized threading model.
+- **PlaceholderAPI Support:** Use any PAPI placeholders in your welcome messages and titles.
+- **Configurable Delays:** Add a delay (in ticks) before welcome messages appear.
+- **Silent Join Support:** Prevent welcome messages for admins or vanished players using permissions.
+- **Testing Commands:** Test your configuration in real-time without relogging.
+- **Fully Customizable Messages:** All system messages and feedback are configurable in `messages.yml`.
+- **Legacy Color Support:** Full support for `&` color codes (e.g., `&a&l`) in all messages and titles.
 
-> New in v1.3.0: Skyward (Happy Ghast) and Copper Age message packs themed after the 1.21.10 content updates.
+## 📥 Installation
 
-### Player Experience
-| Feature | Description | Status |
-|---------|-------------|--------|
-| Custom Message Delays | Set timing for welcome messages | ✅ Implemented |
-| Player-specific Messages | Personalized greetings based on player history | ✅ Implemented |
-| Message Randomization | Random selection from message pool | ✅ Implemented |
-| First Join Special Events | Unique celebrations for first-time players | ✅ Implemented |
-| Multi-world Support | Different settings per world | 🚧 Planned |
+1. Download the plugin JAR.
+2. Place it in your server's `plugins` folder.
+3. (Optional) Install [PlaceholderAPI](https://papi.extendedclip.com/) for extended placeholder support.
+4. Restart your server.
 
-### Administration
-| Feature | Description | Status |
-|---------|-------------|--------|
-| Message Templates | Pre-made message templates | ✅ Implemented |
-| Permissions System | Granular permission control | ✅ Implemented |
-| Message Scheduling | Time-based welcome messages | ✅ Implemented |
-| Statistics Tracking | Track player join/leave patterns | 🚧 Planned |
+## ⚙️ Configuration Files
 
-### Quality of Life
-| Feature | Description | Status |
-|---------|-------------|--------|
-| Command Shortcuts | Quick commands for common actions | ✅ Implemented |
-| Message Preview | Preview messages before saving | ✅ Implemented |
-| Import/Export | Share configurations between servers | 🚧 Planned |
-| Auto-updates | Automatic plugin updates | 🚧 Planned |
-| Performance Optimization | Improved resource usage | ✅ Implemented |
+### `config.yml`
+Controls the core behavior of the welcome/leave effects.
 
-## 🕹 Command Reference
+```yaml
+delays:
+  join-ticks: 20
+
+suppress-permissions:
+  - "welcomemat.silent"
+  - "essentials.silentjoin"
+
+messages:
+  join:
+    enabled: true
+    text: "&e%player% &ajoined the game"
+  first-join:
+    enabled: true
+    text: "&dWelcome %player% to the server for the first time!"
+  leave:
+    enabled: true
+    text: "&e%player% &cleft the game"
+
+titles:
+  join:
+    enabled: true
+    title: "&6Welcome!"
+    subtitle: "&eEnjoy your stay, %player%!"
+    fade-in: 10
+    stay: 70
+    fade-out: 20
+
+sounds:
+  join:
+    enabled: true
+    sound: "ENTITY_PLAYER_LEVELUP"
+    volume: 1.0
+    pitch: 1.0
+```
+
+### `messages.yml`
+Controls all plugin feedback, error messages, and system text.
+
+```yaml
+prefix: "&8[&eWelcomeMat&8] &r"
+command:
+  no-permission: "&cYou do not have permission to use this command."
+  reload-success: "&aConfiguration reloaded successfully!"
+  # ... and more
+```
+
+## 📜 Commands & Permissions
 
 | Command | Permission | Description |
 |---------|------------|-------------|
-| `/welcomemat` or `/wm` | (default) | Shows the interactive help panel with quick-click shortcuts.
-| `/wm gui` | `welcomemat.config` | Opens the in-game Settings GUI for packs, languages, sound profiles, and effects.
-| `/wm sound` | `welcomemat.sound.toggle` | Toggles join/leave sounds for the executing player.
-| `/wm effects` | `welcomemat.effects` | Enables or disables join effects for the executing player.
-| `/wm animation` | `welcomemat.animation` | Opens the animation status view; supports `list`, `set <id|pack|random>`, and `test <id|random>`.
-| `/wm pack` | `welcomemat.pack` | Selects a message pack, switches pack modes, or creates new packs with `/wm pack create <Friendly Name>`.
-| `/wm splash <title\|subtitle> [edit]` | `welcomemat.config` | Views or edits the welcome title/subtitle using clickable chat controls.
-| `/wm language <english\|spanish>` | `welcomemat.language` | Switches the active language bundle.
-| `/wm config <get\|set\|list>` | `welcomemat.config` | Reads or writes any config path. Sound paths preview audio instantly for players.
-| `/wm reload` | `welcomemat.reload` | Reloads `config.yml`, `messages.yml`, and re-runs the migration helper.
+| `/wm reload` | `welcomemat.reload` | Reloads all configuration files. |
+| `/wm test <join\|leave> [player]` | `welcomemat.test` | Simulates an event (visible only to you). Supports optional target player data. |
+| (none) | `welcomemat.silent` | Prevents the join message from being broadcasted (configurable). |
 
-### Command Examples
+## 🔌 Placeholders & Colors
 
-```mcfunction
-# Preview the latest particle work without relogging
-/wm animation test random
-
-# Force the Copper Age message pack while keeping custom splash text
-/wm pack copper_age
-/wm pack mode splash custom
-
-# Update the default join sound and immediately preview it
-/wm config set sounds.join.sound ENTITY_PLAYER_LEVELUP
-/wm config set sounds.join.pitch 1.3
-```
-
-## 📚 Documentation
-
-For full documentation, examples, and setup instructions, please visit our [Modrinth page](https://modrinth.com/plugin/welcome-mat).
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to:
-1. Report bugs
-2. Suggest new features
-3. Submit pull requests
-
-## 📝 Support
-
-Need help? Have suggestions?
-- Create an [issue](https://github.com/coffeeisle/welcome-mat/issues)
-- Join our [Discord server](https://discord.gg/cJ4uP2xF7h)
-
-## 📜 License
-
-WelcomeMat is licensed under the [MIT License](LICENSE).
+- **Colors:** Use legacy codes like `&6` (Gold), `&l` (Bold), etc., in any message.
+- **Placeholders:** `%player%` works by default.
+- **PlaceholderAPI:** If installed, you can use any PAPI placeholder (e.g., `%server_online%`) in:
+  - Join/Leave Messages
+  - Titles & Subtitles
+  - Custom system messages in `messages.yml`
 
 ---
 
-Made with ❤️ & ☕ by [angeldev0](https://github.com/4ngel2769)
+**Original Project:** [WelcomeMat](https://github.com/coffeeisle/welcome-mat) (This is a simplified "Lite" fork).
