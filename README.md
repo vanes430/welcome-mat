@@ -18,7 +18,7 @@ Designed for modern server environments (Folia/Paper/Spigot 1.21+), focusing pur
 
 1. Download the plugin JAR.
 2. Place it in your server's `plugins` folder.
-3. (Optional) Install [PlaceholderAPI](https://papi.extendedclip.com/) for extended placeholder support.
+3. (Optional) Install [PlaceholderAPI](https://modrinth.com/plugin/placeholderapi) for extended placeholder support.
 4. Restart your server.
 
 ## ⚙️ Configuration Files
