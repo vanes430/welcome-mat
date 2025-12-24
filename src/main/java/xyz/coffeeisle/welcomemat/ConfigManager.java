@@ -38,7 +38,7 @@ public class ConfigManager {
             return ChatColor.RED + "Missing message key: " + key;
         }
         String prefix = messagesConfig.getString("prefix", "");
-        return color(prefix + msg);
+        return color(msg.replace("%p%", prefix));
     }
     
     public long getGlobalDelay() {
@@ -59,7 +59,8 @@ public class ConfigManager {
     }
 
     public String getJoinMessage() {
-        return color(config.getString("messages.join.text", "&e%player% &ajoined the game"));
+        String prefix = messagesConfig.getString("prefix", "");
+        return color(config.getString("messages.join.text", "&e%player_name% &ajoined the game").replace("%p%", prefix));
     }
     
     public boolean isFirstJoinMessageEnabled() {
@@ -67,7 +68,8 @@ public class ConfigManager {
     }
     
     public String getFirstJoinMessage() {
-        return color(config.getString("messages.first-join.text", "&dWelcome %player% to the server!"));
+        String prefix = messagesConfig.getString("prefix", "");
+        return color(config.getString("messages.first-join.text", "&dWelcome %player_name% to the server!").replace("%p%", prefix));
     }
 
     public boolean isLeaveMessageEnabled() {
@@ -75,7 +77,8 @@ public class ConfigManager {
     }
 
     public String getLeaveMessage() {
-        return color(config.getString("messages.leave.text", "&e%player% &cleft the game"));
+        String prefix = messagesConfig.getString("prefix", "");
+        return color(config.getString("messages.leave.text", "&e%player_name% &cleft the game").replace("%p%", prefix));
     }
 
     // --- Titles ---

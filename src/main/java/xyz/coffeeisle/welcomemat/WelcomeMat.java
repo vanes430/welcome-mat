@@ -57,6 +57,6 @@ public class WelcomeMat extends JavaPlugin {
         if (papiHooked) {
             return me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, text);
         }
-        return text.replace("%player%", player.getName());
+        return text;
     }
 }

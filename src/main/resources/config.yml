@@ -17,13 +17,13 @@ suppress-permissions:
 messages:
   join:
     enabled: true
-    text: "&e%player% &ajoined the game"
+    text: "&e%player_name% &ajoined the game"
   first-join:
     enabled: true
-    text: "&dWelcome %player% to the server for the first time!"
+    text: "&dWelcome %player_name% to the server for the first time!"
   leave:
     enabled: true
-    text: "&e%player% &cleft the game"
+    text: "&e%player_name% &cleft the game"
 
 titles:
   join:
